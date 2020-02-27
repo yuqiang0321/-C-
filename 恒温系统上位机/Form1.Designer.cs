@@ -51,7 +51,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -311,7 +310,6 @@
             // 
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.comboBox6);
-            this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.textBox2);
             this.groupBox4.Controls.Add(this.button4);
@@ -348,16 +346,6 @@
             this.comboBox6.Size = new System.Drawing.Size(50, 20);
             this.comboBox6.TabIndex = 25;
             this.comboBox6.Text = "2.0";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(77, 183);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(63, 34);
-            this.button7.TabIndex = 14;
-            this.button7.Text = "开启自动";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
             // label6
             // 
@@ -804,7 +792,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox7;

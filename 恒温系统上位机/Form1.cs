@@ -233,10 +233,6 @@ namespace 恒温系统上位机
         }
 
         //监听数据
-      
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
 
         private void sortProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
@@ -361,21 +357,21 @@ namespace 恒温系统上位机
             }
             else time_out--;
         }
-        private void button7_Click_1(object sender, EventArgs e)
-        {
-            if (button7.Text == "开启自动")
-            {
-                button7.Text = "关闭自动";
-                timer2.Start();
-            }
-            else
-            {
-                button7.Text = "开启自动";
-                timer2.Stop();
-                time_1ms = 0;
-               // time_num = 0;
-            }
-        }
+        //private void button7_Click_1(object sender, EventArgs e)
+        //{
+        //    if (button7.Text == "开启自动")
+        //    {
+        //        button7.Text = "关闭自动";
+        //        timer2.Start();
+        //    }
+        //    else
+        //    {
+        //        button7.Text = "开启自动";
+        //        timer2.Stop();
+        //        time_1ms = 0;
+        //       // time_num = 0;
+        //    }
+        //}
         float time_1ms = 0;
       //  int time_num = 0;
         private void timer2_Tick(object sender, EventArgs e)
