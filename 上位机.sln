@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "恒温系统上位机", "恒温系统上位机\恒温系统上位机.csproj", "{E90093D4-EA9F-44BB-B91B-BCF4F524D029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "上位机", "恒温系统上位机\上位机.csproj", "{E90093D4-EA9F-44BB-B91B-BCF4F524D029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A3B84BB-728C-467C-9742-D8769787E133}
 	EndGlobalSection
 EndGlobal

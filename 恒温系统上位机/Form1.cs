@@ -23,13 +23,13 @@ using NATUPNPLib;                      //Windows UPnP COM组件
 using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace 恒温系统上位机
+namespace 上位机
 {
     public partial class Form1 : Form
     {
         public int PortName;
        
-       public StringBuilder Note_StringBuilder;
+        public StringBuilder Note_StringBuilder;
  
         //---定义  
         private delegate void ShowReceiveMessageCallBack(string text);

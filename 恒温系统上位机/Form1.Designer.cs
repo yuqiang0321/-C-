@@ -1,4 +1,4 @@
-﻿namespace 恒温系统上位机
+﻿namespace 上位机
 {
     partial class Form1
     {

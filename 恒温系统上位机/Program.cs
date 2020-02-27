@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 恒温系统上位机
+namespace 上位机
 {
     static class Program
     {
