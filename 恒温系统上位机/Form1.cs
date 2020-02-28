@@ -48,6 +48,7 @@ namespace 上位机
             serialPort1.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//必须手动添加事件处理程序
            
         }
+
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)//串口数据接收事件
         {
             try
@@ -61,10 +62,61 @@ namespace 上位机
                     if (time_flag == true)
                     {
                         textBox1.AppendText(GetTimeStamp() + " 温度: " + str + '\r' + '\n');//添加内容
-                        textBox15.AppendText(str);
+                        //textBox15.AppendText(str);
                     }
                     else
-                        textBox1.AppendText(str + '\r' + '\n');//添加内容
+                    {
+                        //textBox1.AppendText(str + '\r' + '\n');//添加内容
+                        //bool b = str.Contains("一节电池电压为:");
+                        if (str.Contains("一节电池电压为:"))
+                        {
+                            //textBox1.AppendText(str + '\r' + '\n');
+                            textBox4.Clear();
+                            textBox4.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("二节电池电压为:"))
+                        {
+                            textBox6.Clear();
+                            textBox6.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("三节电池电压为:"))
+                        {
+                            textBox8.Clear();
+                            textBox8.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("四节电池电压为:"))
+                        {
+                            textBox5.Clear();
+                            textBox5.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("五节电池电压为:"))
+                        {
+                            textBox7.Clear();
+                            textBox7.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("六节电池电压为:"))
+                        {
+                            textBox9.Clear();
+                            textBox9.AppendText(str.Substring(9) + '\r' + '\n');
+                        }
+                        else if (str.Contains("电池总电压为:"))
+                        {
+                            textBox2.Clear();
+                            textBox2.AppendText(str.Substring(7) + '\r' + '\n');
+                        }
+                        else if (str.Contains("电池温度为:"))
+                        {
+                            textBox12.Clear();
+                            textBox12.AppendText(str.Substring(6) + '\r' + '\n');
+                        }
+                        else if (str.Contains("当前电流为:"))
+                        {
+                            textBox11.Clear();
+                            textBox11.AppendText(str.Substring(6) + '\r' + '\n');
+                        }
+
+
+                    }
                        
                 }
                 else
@@ -98,6 +150,14 @@ namespace 上位机
                     comboBox3.Enabled = false;
                     comboBox4.Enabled = false;
                     textBox1.AppendText("串口已连接\r\n");
+                    byte[] Data = new byte[1];
+                    Data[0] = Convert.ToByte(0x01);
+                    serialPort1.Write(Data, 0, 1);
+                    Data[0] = Convert.ToByte(0x02);
+                    serialPort1.Write(Data, 0, 1); 
+                    Data[0] = Convert.ToByte(0x55);
+                    serialPort1.Write(Data, 0, 1);
+
                 }
                 catch
                 {
@@ -149,7 +209,7 @@ namespace 上位机
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
-            textBox2.Clear();
+            //textBox2.Clear();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -157,17 +217,13 @@ namespace 上位机
             textBox3.Clear();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-           // string[] STR_DATA1;
-          //  STR_DATA1 = System.IO.File.ReadAllLines(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\接收数据保存.txt");
-          //  string myStr = string.Join("", STR_DATA1);
-          //     textBox1.AppendText(myStr);
-            System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\接收数据保存.txt", textBox1.Text);
-            System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\发送数据保存.txt", textBox3.Text);
-            textBox2.AppendText(" 数据保存完成!!! \r\n");
+        //private void button4_Click(object sender, EventArgs e)
+        //{
+        //    System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\接收数据保存.txt", textBox1.Text);
+        //    System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\发送数据保存.txt", textBox3.Text);
+        //    textBox2.AppendText(" 数据保存完成!!! \r\n");
           
-        }
+        //}
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -187,7 +243,7 @@ namespace 上位机
                                   Encoding gb = System.Text.Encoding.GetEncoding("gb2312");
                                   byte[] bytes = gb.GetBytes(textBox3.Text);
                                   serialPort1.Write(bytes, 0, bytes.Length);
-                                textBox2.Text = "你发送的数据为：" + textBox3.Text;
+                                //textBox2.Text = "你发送的数据为：" + textBox3.Text;
                               }
                               catch
                               {
@@ -208,7 +264,7 @@ namespace 上位机
                                 Data[0] = Convert.ToByte(textBox3.Text.Substring(textBox3.Text.Length - 1, 1), 16);//单独发送B（0B）
                                 serialPort1.Write(Data, 0, 1);//发送
                             }
-                            textBox2.Text = "你发送的数据为：" + textBox3.Text;
+                            //textBox2.Text = "你发送的数据为：" + textBox3.Text;
                         }
                     }
                 }
@@ -224,12 +280,6 @@ namespace 上位机
             }
 
 
-        }
-
-        //---添加接受消息到列表的委托的方法  
-        private void AddMessageToList(string text)
-        {
-            textBox1.AppendText(text);
         }
 
         //监听数据
@@ -319,59 +369,45 @@ namespace 上位机
             if (time_out == 1)
             {
                 time_out --;
-                chart1.Series.Clear();
-                chart1.ChartAreas[0].AxisX.Maximum = 20;//设定x轴的最大值
-                chart1.ChartAreas[0].AxisY.Maximum = 100;//设定y轴的最大值
+                //chart1.Series.Clear();
+                //chart1.ChartAreas[0].AxisX.Maximum = 20;//设定x轴的最大值
+                //chart1.ChartAreas[0].AxisY.Maximum = 100;//设定y轴的最大值
 
-                chart1.ChartAreas[0].AxisX.Minimum = 0;//设定x轴的最小值
-                chart1.ChartAreas[0].AxisY.Minimum =-10;//设定y轴的最小值
+                //chart1.ChartAreas[0].AxisX.Minimum = 0;//设定x轴的最小值
+                //chart1.ChartAreas[0].AxisY.Minimum =-10;//设定y轴的最小值
 
-                //第一条数据
-                Series series = new Series("实时温度");
-                series.ChartType = SeriesChartType.Spline;  //设置为曲线模式
-                series.BorderWidth = 1;
-                series.ShadowOffset = 1;             // Populate new series with data    
+                ////第一条数据
+                //Series series = new Series("实时温度");
+                //series.ChartType = SeriesChartType.Spline;  //设置为曲线模式
+                //series.BorderWidth = 1;
+                //series.ShadowOffset = 1;             // Populate new series with data    
 
-                for (int i = 0; i < 19; i++)
-                {
-                    myIntArray4[i] = myIntArray4[i + 1];
-                         series.Points.AddY(myIntArray4[i]);//画线
-                }
+                //for (int i = 0; i < 19; i++)
+                //{
+                //    myIntArray4[i] = myIntArray4[i + 1];
+                //         series.Points.AddY(myIntArray4[i]);//画线
+                //}
 
-                try
-                {
-                    string s =textBox15.Text;
-                    string str = s.Remove(0, 3);
-                    str = str.Remove(2, str.Length - 2);
-                    // textBox13.Text = textBox15.Text.Substring(textBox15.Text.IndexOf("温度：") + 2, textBox15.Text.IndexOf("温度：") + 4);
-                    textBox13.Text = str;
-                    myIntArray4[19] = Convert.ToInt32(textBox13.Text);
-                }
-                catch
-                {
-                    myIntArray4[19] = 0;
-                }
-                series.Points.AddY(myIntArray4[19]);
+                //try
+                //{
+                //    string s =textBox15.Text;
+                //    string str = s.Remove(0, 3);
+                //    str = str.Remove(2, str.Length - 2);
+                //    // textBox13.Text = textBox15.Text.Substring(textBox15.Text.IndexOf("温度：") + 2, textBox15.Text.IndexOf("温度：") + 4);
+                //    textBox13.Text = str;
+                //    myIntArray4[19] = Convert.ToInt32(textBox13.Text);
+                //}
+                //catch
+                //{
+                //    myIntArray4[19] = 0;
+                //}
+                //series.Points.AddY(myIntArray4[19]);
 
-                chart1.Series.Add(series);
+                //chart1.Series.Add(series);
             }
             else time_out--;
         }
-        //private void button7_Click_1(object sender, EventArgs e)
-        //{
-        //    if (button7.Text == "开启自动")
-        //    {
-        //        button7.Text = "关闭自动";
-        //        timer2.Start();
-        //    }
-        //    else
-        //    {
-        //        button7.Text = "开启自动";
-        //        timer2.Stop();
-        //        time_1ms = 0;
-        //       // time_num = 0;
-        //    }
-        //}
+
         float time_1ms = 0;
       //  int time_num = 0;
         private void timer2_Tick(object sender, EventArgs e)
@@ -380,10 +416,10 @@ namespace 上位机
             if (time_1ms == (Convert.ToSingle(comboBox6.Text) * 10))
             {
                // time_1ms = 0;
-                System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\接收数据保存.txt", textBox1.Text);
-                System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\发送数据保存.txt", textBox3.Text);
-                textBox2.Clear();
-                textBox2.AppendText(" 数据保存完成!!! \r\n");
+                //System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\接收数据保存.txt", textBox1.Text);
+                //System.IO.File.WriteAllText(@"F:\Visual_Studio\恒温控制系统上位机\恒温系统上位机\数据保存\发送数据保存.txt", textBox3.Text);
+                //textBox2.Clear();
+                //textBox2.AppendText(" 数据保存完成!!! \r\n");
 
                 //   time_num++;
                 //   textBox1.Text = Convert.ToString(time_num);
@@ -408,11 +444,6 @@ namespace 上位机
                  e.Cancel = true;
              }*/
             Process.GetCurrentProcess().Kill();//彻底关闭软件
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
         }
 
         public static string GetTimeStamp()
@@ -454,7 +485,7 @@ namespace 上位机
                         serialPort1.Write(Data, 0, 1);//发送
                     }
 
-                    textBox2.Text = "你设置的温度为：" + comboBox7.Text + comboBox8.Text +"度!!";
+                    //textBox2.Text = "你设置的温度为：" + comboBox7.Text + comboBox8.Text +"度!!";
                 }
                 catch
                 {
@@ -467,10 +498,11 @@ namespace 上位机
             }
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }
+
     }
 
 }
